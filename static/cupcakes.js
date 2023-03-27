@@ -73,5 +73,6 @@ $("#form").on("submit", async function (e) {
 
   const cupcake = new Cupcake(flav, sz, rtg, img);
   await cupcake.create();
+  $cakeList.empty();
   await getCakes();
 });
