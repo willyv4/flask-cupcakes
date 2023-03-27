@@ -16,6 +16,14 @@ class Cupcake {
       });
       console.log(response.data);
       alert("Cupcake was created!");
+
+      const cupcake = new Cupcake(
+        cupcake.flavor,
+        cupcake.size,
+        cupcake.rating,
+        cupcake.image
+      );
+      listCakes([cupcake]);
     } catch (error) {
       console.log(error);
     }
@@ -54,10 +62,9 @@ async function getCakes() {
   });
   listCakes(cupcakes);
 }
-
 getCakes();
 
-$("#form").on("submit", function (e) {
+$("#form").on("submit", async function (e) {
   e.preventDefault();
   const flav = $("#cupcakeFlavor").val();
   const sz = $("#cupcakeSize").val();
@@ -65,5 +72,6 @@ $("#form").on("submit", function (e) {
   const img = $("#cupcakeImage").val();
 
   const cupcake = new Cupcake(flav, sz, rtg, img);
-  cupcake.create();
+  await cupcake.create();
+  await getCakes();
 });
